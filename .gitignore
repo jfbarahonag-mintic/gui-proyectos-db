@@ -1,2 +1,4 @@
 /bin/
-**/lib/
+
+# To import the driver needed to execute sqlite 
+#**/lib/
