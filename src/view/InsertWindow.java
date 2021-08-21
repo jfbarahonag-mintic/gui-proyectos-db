@@ -15,6 +15,20 @@ public class InsertWindow extends JFrame implements ActionListener {
     private JButton confirmBtn_;
 
     private JPanel[] panelsArray_;
+    private JTextField[] fieldsArray_;
+
+    private boolean areAllFieldsFilled()
+    {
+        boolean succeed = true;
+
+        for (var field : fieldsArray_) {
+            if(field.getText().equals("") == true){
+                return false;
+            }
+        }
+        
+        return succeed;
+    }
 
     private void dataPanelInit()
     {
@@ -26,26 +40,28 @@ public class InsertWindow extends JFrame implements ActionListener {
 
     private void addContent(int i, String labels[])
     {
+        /* Instance the objects */
         panelsArray_[i] = new JPanel();
-            var internalGL = new GridLayout(2, 1);
-            panelsArray_[i].setLayout(internalGL);
-            panelsArray_[i].setPreferredSize(new Dimension(10,10));
-            panelsArray_[i].setBorder(new LineBorder(Color.WHITE));
+        fieldsArray_[i] = new JTextField();
 
-            JLabel s = new JLabel(labels[i]);
-            s.setBounds(0, 0, 500, 30);
-            panelsArray_[i].add(s);
-            
-            JTextField t = new JTextField();
-            t.setBounds(0, 0, 500, 30);
-            t.setPreferredSize(new Dimension(100,15));
-            panelsArray_[i].add(t);
-            dataPanel_.add(panelsArray_[i]);
+        var internalGL = new GridLayout(2, 1);
+        panelsArray_[i].setLayout(internalGL);
+        panelsArray_[i].setPreferredSize(new Dimension(10,10));
+        panelsArray_[i].setBorder(new LineBorder(Color.WHITE));
+
+        JLabel s = new JLabel(labels[i]);
+        panelsArray_[i].add(s);
+        
+        fieldsArray_[i].setPreferredSize(new Dimension(100,15));
+        panelsArray_[i].add(fieldsArray_[i]);
+        
+        dataPanel_.add(panelsArray_[i]);
     }
 
     private void addFields()
     {
         panelsArray_ = new JPanel[10];
+        fieldsArray_ = new JTextField[10];
         String[] labels = new String[] {"ID", "Nombre", "Primer Apellido", "Segundo Apellido", "Salario", "Ciudad de Residencia", "Cargo", "Clasificacion", "Documento de identidad", "Fecha de nacimiento [AAAA-MM-DD]"};
         for (int i = 0; i < panelsArray_.length; i++) {
             addContent(i, labels);
@@ -80,7 +96,10 @@ public class InsertWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == confirmBtn_)
         {
-            System.out.println("Confirm");
+            if (!areAllFieldsFilled())
+            {
+                JOptionPane.showMessageDialog(this, "Se deben llenar todos los campos", "Insertar lider", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
