@@ -109,6 +109,13 @@ public class InsertWindow extends JFrame implements ActionListener {
         }
     }
 
+    private void cleanAllFields()
+    {
+        for (var field : fieldsArray_) {
+            field.setText("");
+        }
+    }
+
     private void executeInsert()
     {
         try {
@@ -127,12 +134,16 @@ public class InsertWindow extends JFrame implements ActionListener {
             
             boolean ok = requirementsHandler.insertRequirement(requirementsHandler.fillLeaderData(ID, nombre, primerApellido, segundoApellido, salario, ciudadResidencia, cargo, clasificacion, documentoIdentidad, fechaNacimiento));
 
-            String saved = (ok == true) ? "saved" : "not saved";
+            String saved = (ok == true) ? "Lider agregado" : "Error. Lider no agregado";
+            JOptionPane.showMessageDialog(this, saved, "Insertar lider", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(saved);
 
+            if(ok == true) cleanAllFields();
+            
         } catch (Exception e) {
             System.out.println("Error handled... Message :\r\n" + e.getMessage());
             e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error con los parametros recibidos. Por favor revise", "Insertar lider", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
