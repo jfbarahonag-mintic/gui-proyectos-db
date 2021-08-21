@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 public class MainWindow extends JFrame implements ActionListener {
     
     private JButton btnInsert_, btnQuery_;
-    private JTable tblResults_;
-    private JScrollPane scrlResults_;
 
     private FlowLayout screen_;
 

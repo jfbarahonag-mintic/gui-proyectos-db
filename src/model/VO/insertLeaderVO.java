@@ -1,6 +1,6 @@
 package model.VO;
 
-public class insertLeaderVO {
+public class InsertLeaderVO {
     
     private Integer ID;
     private Integer salario;

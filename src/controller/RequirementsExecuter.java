@@ -6,14 +6,14 @@ import model.VO.*;
 import model.DAO.*;
 
 public class RequirementsExecuter {
-    private final insertLeaderDAO requirement1DAO;
+    private final InsertLeaderDAO requirement1DAO;
 
     public RequirementsExecuter()
     {
-        requirement1DAO = new insertLeaderDAO();
+        requirement1DAO = new InsertLeaderDAO();
     }
 
-    public insertLeaderVO fillLeaderData(Integer ID,
+    public InsertLeaderVO fillLeaderData(Integer ID,
                                             String nombre,
                                             String primerApellido,
                                             String segundoApellido,
@@ -25,7 +25,7 @@ public class RequirementsExecuter {
                                             String fechaNacimiento
                                             )
     {
-        insertLeaderVO newLeader = new insertLeaderVO();
+        InsertLeaderVO newLeader = new InsertLeaderVO();
 
         newLeader.setID(ID);
         newLeader.setNombre(nombre);
@@ -41,7 +41,7 @@ public class RequirementsExecuter {
         return newLeader;
     } 
 
-    public boolean insertRequirement(insertLeaderVO leader) throws SQLException
+    public boolean insertRequirement(InsertLeaderVO leader) throws SQLException
     {
         return requirement1DAO.insertLeader(leader);
     }

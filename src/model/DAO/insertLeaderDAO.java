@@ -2,11 +2,11 @@ package model.DAO;
 
 import java.sql.SQLException;
 
-import model.VO.insertLeaderVO;
+import model.VO.InsertLeaderVO;
 import util.JDBCUtilities;
 
-public class insertLeaderDAO {
-    public boolean insertLeader(insertLeaderVO leader) throws SQLException
+public class InsertLeaderDAO {
+    public boolean insertLeader(InsertLeaderVO leader) throws SQLException
     {
         boolean succeed = true;
 
