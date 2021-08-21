@@ -14,12 +14,16 @@ public class MainWindow extends JFrame implements ActionListener {
 
     private FlowLayout screen_;
 
+    private InsertWindow insertW_;
+
     public MainWindow()
     {
         setTitle("Proyectos");
         
         setBounds(0, 0, 300, 100);
         setLocationRelativeTo(null);
+
+        insertW_ = new InsertWindow();
         
         btnQuery_ = new JButton("Consultar");
         btnQuery_.setBounds(10, 10, 115, 25);
@@ -47,6 +51,7 @@ public class MainWindow extends JFrame implements ActionListener {
     {
         if (e.getSource() == btnInsert_) {
             System.out.println("Insert");
+            insertW_.execute();
         }
         if (e.getSource() == btnQuery_) {
             System.out.println("Query");
