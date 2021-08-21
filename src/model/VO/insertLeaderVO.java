@@ -6,7 +6,7 @@ public class insertLeaderVO {
     private Integer salario;
     private Integer clasificacion;
     private String nombre;
-    private String primerapellido;
+    private String primerApellido;
     private String segundoApellido;
     private String ciudadResidencia;
     private String cargo;
@@ -37,11 +37,11 @@ public class insertLeaderVO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getPrimerapellido() {
-        return primerapellido;
+    public String getPrimerApellido() {
+        return primerApellido;
     }
-    public void setPrimerapellido(String primerapellido) {
-        this.primerapellido = primerapellido;
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
     }
     public String getSegundoApellido() {
         return segundoApellido;
