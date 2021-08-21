@@ -8,6 +8,8 @@ import javax.swing.border.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import controller.*;
+
 public class InsertWindow extends JFrame implements ActionListener {
     
     private JPanel dataPanel_;
@@ -16,6 +18,8 @@ public class InsertWindow extends JFrame implements ActionListener {
 
     private JPanel[] panelsArray_;
     private JTextField[] fieldsArray_;
+
+    public static final RequirementsExecuter requirementsHandler = new RequirementsExecuter();
 
     private boolean areAllFieldsFilled()
     {
@@ -99,7 +103,36 @@ public class InsertWindow extends JFrame implements ActionListener {
             if (!areAllFieldsFilled())
             {
                 JOptionPane.showMessageDialog(this, "Se deben llenar todos los campos", "Insertar lider", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+            executeInsert();
+        }
+    }
+
+    private void executeInsert()
+    {
+        try {
+            //TODO: Please protect teh code against bad inputs!!!!!
+            int counter = 0;
+            Integer ID = Integer.parseInt(fieldsArray_[counter++].getText());
+            String nombre = fieldsArray_[counter++].getText();
+            String primerApellido = fieldsArray_[counter++].getText();
+            String segundoApellido = fieldsArray_[counter++].getText();
+            Integer salario = Integer.parseInt(fieldsArray_[counter++].getText());
+            String ciudadResidencia = fieldsArray_[counter++].getText();
+            String cargo = fieldsArray_[counter++].getText();
+            Integer clasificacion = Integer.parseInt(fieldsArray_[counter++].getText());
+            String documentoIdentidad = fieldsArray_[counter++].getText();
+            String fechaNacimiento = fieldsArray_[counter++].getText();
+            
+            boolean ok = requirementsHandler.insertRequirement(requirementsHandler.fillLeaderData(ID, nombre, primerApellido, segundoApellido, salario, ciudadResidencia, cargo, clasificacion, documentoIdentidad, fechaNacimiento));
+
+            String saved = (ok == true) ? "saved" : "not saved";
+            System.out.println(saved);
+
+        } catch (Exception e) {
+            System.out.println("Error handled... Message :\r\n" + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
