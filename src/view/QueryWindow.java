@@ -27,6 +27,22 @@ public class QueryWindow extends JFrame implements ActionListener {
         button = new JButton(name);
         button.addActionListener(this);
         btnsPnl_.add(button);
+
+        // This is needed. Passed by value NOT by reference
+        switch (button.getText()) {
+            case "Lideres":
+                leadrsBtn_ = button;
+                break;
+            case "Materiales":
+                materialsBtn_ = button;
+                break;
+            case "Limpiar":
+                clearBtn_ = button;
+                break;
+            default:
+            System.out.println("[addButton] -> Assignation error.");
+                break;
+        }
     }
 
     private void buttonsInit()
