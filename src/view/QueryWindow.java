@@ -22,19 +22,18 @@ public class QueryWindow extends JFrame implements ActionListener {
     private JScrollPane resultsScrl_;
     FlowLayout layout_;
 
+    private void addButton(JButton button, String name)
+    {
+        button = new JButton(name);
+        button.addActionListener(this);
+        btnsPnl_.add(button);
+    }
+
     private void buttonsInit()
     {
-        leadrsBtn_ = new JButton("Lideres");
-        leadrsBtn_.addActionListener(this);
-        btnsPnl_.add(leadrsBtn_);
-        
-        materialsBtn_ = new JButton("Materiales");
-        materialsBtn_.addActionListener(this);
-        btnsPnl_.add(materialsBtn_);
-        
-        clearBtn_ = new JButton("Limpiar");
-        clearBtn_.addActionListener(this);
-        btnsPnl_.add(clearBtn_);
+        addButton(leadrsBtn_, "Lideres");
+        addButton(materialsBtn_, "Materiales");
+        addButton(clearBtn_, "Limpiar");
     }
 
     private void dataPanelInit()
