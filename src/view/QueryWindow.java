@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.JFrame;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +19,8 @@ public class QueryWindow extends JFrame implements ActionListener {
     private DefaultTableModel  resultsDfltTbl_;
     private JScrollPane resultsScrl_;
     FlowLayout layout_;
+
+    private boolean tableLoaded_ = false;
 
     private void addButton(JButton button, String name)
     {
@@ -80,13 +80,7 @@ public class QueryWindow extends JFrame implements ActionListener {
 
     private void tableInit()
     {
-        resultsDfltTbl_ = new DefaultTableModel();
-        resultsTbl_ = new JTable(resultsDfltTbl_);
-        
-        resultsScrl_ = new JScrollPane(resultsTbl_);
-        resultsScrl_.setPreferredSize(new Dimension(595, 315));
-        
-        tblPnl_.add(resultsScrl_);
+        resetResultsTable();
     }
 
     public QueryWindow()
@@ -111,17 +105,60 @@ public class QueryWindow extends JFrame implements ActionListener {
         if(e.getSource() == leadrsBtn_)
         {
             System.out.println("leaders");
+            onLeadersBtnPressed();
         }
         
         if(e.getSource() == materialsBtn_)
         {
             System.out.println("materials");
+            onMaterialsBtnPressed();
         }
         
         if(e.getSource() == clearBtn_)
         {
             System.out.println("clear");
+            onClearBtnPressed();
         }
         
+    }
+    
+    private void resetResultsTable()
+    {
+        if(tableLoaded_)
+        {
+            tblPnl_.remove(resultsScrl_);
+            tableLoaded_ = false;
+        }
+        resultsDfltTbl_ = null;
+        resultsTbl_ = null;
+        resultsScrl_ = null;
+        
+        resultsDfltTbl_ = new DefaultTableModel();
+        resultsTbl_ = new JTable(resultsDfltTbl_);
+
+        // resultsDfltTbl_.addColumn("new one");
+
+        resultsScrl_ = new JScrollPane(resultsTbl_);
+        resultsScrl_.setPreferredSize(new Dimension(595, 315));
+        
+        tblPnl_.add(resultsScrl_);
+        tableLoaded_ = true;
+
+        SwingUtilities.updateComponentTreeUI(this);
+    }
+
+    private void onLeadersBtnPressed()
+    {
+        resetResultsTable();
+    }
+    
+    private void onMaterialsBtnPressed()
+    {
+        resetResultsTable();
+    }
+    
+    private void onClearBtnPressed()
+    {
+        resetResultsTable();
     }
 }

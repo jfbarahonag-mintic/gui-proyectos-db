@@ -21,9 +21,6 @@ public class MainWindow extends JFrame implements ActionListener {
         
         setBounds(0, 0, 300, 100);
         setLocationRelativeTo(null);
-
-        insertW_ = new InsertWindow();
-        queryW_ = new QueryWindow();
         
         btnQuery_ = new JButton("Consultar");
         btnQuery_.setBounds(10, 10, 115, 25);
@@ -51,10 +48,12 @@ public class MainWindow extends JFrame implements ActionListener {
     {
         if (e.getSource() == btnInsert_) {
             System.out.println("Insert");
+            insertW_ = new InsertWindow();
             insertW_.execute();
         }
         if (e.getSource() == btnQuery_) {
             System.out.println("Query");
+            queryW_ = new QueryWindow();
             queryW_.execute();
         }
     }
