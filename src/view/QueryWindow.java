@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -15,7 +16,9 @@ public class QueryWindow extends JFrame implements ActionListener {
     private JPanel tblPnl_;
     private JButton leadrsBtn_;
     private JButton materialsBtn_;
-    private JTable resultsTbl_;
+    private JButton clearBtn_;
+    private JTable  resultsTbl_;
+    private DefaultTableModel  resultsDfltTbl_;
     private JScrollPane resultsScrl_;
     FlowLayout layout_;
 
@@ -27,8 +30,11 @@ public class QueryWindow extends JFrame implements ActionListener {
         
         materialsBtn_ = new JButton("Materiales");
         materialsBtn_.addActionListener(this);
-        
         btnsPnl_.add(materialsBtn_);
+        
+        clearBtn_ = new JButton("Limpiar");
+        clearBtn_.addActionListener(this);
+        btnsPnl_.add(clearBtn_);
     }
 
     private void dataPanelInit()
@@ -38,7 +44,7 @@ public class QueryWindow extends JFrame implements ActionListener {
         btnsPnl_.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, true));
         btnsPnl_.setBackground(Color.GREEN);
         {
-            var fl = new FlowLayout(FlowLayout.CENTER, 200, 30);
+            var fl = new FlowLayout(FlowLayout.CENTER, 100, 30);
             btnsPnl_.setLayout(fl);
         }
         add(btnsPnl_);
@@ -59,7 +65,8 @@ public class QueryWindow extends JFrame implements ActionListener {
 
     private void tableInit()
     {
-        resultsTbl_ = new JTable();
+        resultsDfltTbl_ = new DefaultTableModel();
+        resultsTbl_ = new JTable(resultsDfltTbl_);
         
         resultsScrl_ = new JScrollPane(resultsTbl_);
         resultsScrl_.setPreferredSize(new Dimension(595, 315));
@@ -94,6 +101,11 @@ public class QueryWindow extends JFrame implements ActionListener {
         if(e.getSource() == materialsBtn_)
         {
             System.out.println("materials");
+        }
+        
+        if(e.getSource() == clearBtn_)
+        {
+            System.out.println("clear");
         }
         
     }
