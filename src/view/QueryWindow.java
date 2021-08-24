@@ -147,14 +147,34 @@ public class QueryWindow extends JFrame implements ActionListener {
         SwingUtilities.updateComponentTreeUI(this);
     }
 
+    private void fillMaterialsTableData()
+    {
+        String[] columns = new String[] {"ID Proyecto", "Nombre Material", "Precio por Unidad"};
+        
+        for (String column : columns) {
+            resultsDfltTbl_.addColumn(column);
+        }
+    }
+    
+    private void fillLeadersTableData()
+    {
+        String[] columns = new String[] {"ID Lider", "Salario", "Ciudad de residencia"};
+        
+        for (String column : columns) {
+            resultsDfltTbl_.addColumn(column);
+        }
+    }
+
     private void onLeadersBtnPressed()
     {
         resetResultsTable();
+        fillLeadersTableData();
     }
     
     private void onMaterialsBtnPressed()
     {
         resetResultsTable();
+        fillMaterialsTableData();
     }
     
     private void onClearBtnPressed()
