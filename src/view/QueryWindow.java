@@ -26,6 +26,44 @@ public class QueryWindow extends JFrame implements ActionListener {
 
     public static final RequirementsExecuter requirementsHandler = new RequirementsExecuter();
 
+    public QueryWindow()
+    {
+        layout_ = new FlowLayout(FlowLayout.CENTER, 10, 10);
+        setLayout(layout_);
+        setTitle("Consultas");
+        setMinimumSize(new Dimension(640, 480));
+        setLocationRelativeTo(null);
+        setResizable(false);
+
+        dataPanelInit();
+    }
+
+    private void dataPanelInit()
+    {
+        btnsPnl_ = new JPanel();
+        btnsPnl_.setPreferredSize(new Dimension(605, 80));
+        btnsPnl_.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, true));
+        //btnsPnl_.setBackground(Color.GREEN);
+        {
+            var fl = new FlowLayout(FlowLayout.CENTER, 100, 30);
+            btnsPnl_.setLayout(fl);
+        }
+        add(btnsPnl_);
+        
+        buttonsInit();
+        
+        tblPnl_ = new JPanel();
+        tblPnl_.setPreferredSize(new Dimension(605, 335));
+        //tblPnl_.setBackground(Color.CYAN);
+        {
+            var fl = new FlowLayout(FlowLayout.CENTER, 200, 11);
+            tblPnl_.setLayout(fl);
+        }
+        add(tblPnl_);
+
+        tableInit();
+    }
+
     private void addButton(JButton button, String name)
     {
         button = new JButton(name);
@@ -56,47 +94,9 @@ public class QueryWindow extends JFrame implements ActionListener {
         addButton(clearBtn_, "Limpiar");
     }
 
-    private void dataPanelInit()
-    {
-        btnsPnl_ = new JPanel();
-        btnsPnl_.setPreferredSize(new Dimension(605, 80));
-        btnsPnl_.setBorder(new LineBorder(Color.LIGHT_GRAY, 1, true));
-        btnsPnl_.setBackground(Color.GREEN);
-        {
-            var fl = new FlowLayout(FlowLayout.CENTER, 100, 30);
-            btnsPnl_.setLayout(fl);
-        }
-        add(btnsPnl_);
-        
-        buttonsInit();
-        
-        tblPnl_ = new JPanel();
-        tblPnl_.setPreferredSize(new Dimension(605, 335));
-        tblPnl_.setBackground(Color.CYAN);
-        {
-            var fl = new FlowLayout(FlowLayout.CENTER, 200, 11);
-            tblPnl_.setLayout(fl);
-        }
-        add(tblPnl_);
-
-        tableInit();
-    }
-
     private void tableInit()
     {
         resetResultsTable();
-    }
-
-    public QueryWindow()
-    {
-        layout_ = new FlowLayout(FlowLayout.CENTER, 10, 10);
-        setLayout(layout_);
-        setTitle("Consultas");
-        setMinimumSize(new Dimension(640, 480));
-        setLocationRelativeTo(null);
-        setResizable(false);
-
-        dataPanelInit();
     }
 
     public void execute()
