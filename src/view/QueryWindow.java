@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import controller.*;
+
 public class QueryWindow extends JFrame implements ActionListener {
 
     private JPanel btnsPnl_;
@@ -21,6 +23,8 @@ public class QueryWindow extends JFrame implements ActionListener {
     FlowLayout layout_;
 
     private boolean tableLoaded_ = false;
+
+    public static final RequirementsExecuter requirementsHandler = new RequirementsExecuter();
 
     private void addButton(JButton button, String name)
     {
@@ -154,6 +158,18 @@ public class QueryWindow extends JFrame implements ActionListener {
         for (String column : columns) {
             resultsDfltTbl_.addColumn(column);
         }
+
+        try {
+            var response = requirementsHandler.queryMaterialsRequirement();
+            for (var material : response) {
+                String[] rowData = new String[] {material.getIdProyecto().toString(), material.getNombreMaterial(), material.getPrecioUnidad().toString()};
+                resultsDfltTbl_.addRow(rowData);
+            }
+        } catch (Exception e) {
+            System.out.println("Error handled... Message :\r\n" + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error con los parametros recibidos. Por favor revise", "Consulta Lider", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void fillLeadersTableData()
@@ -162,6 +178,18 @@ public class QueryWindow extends JFrame implements ActionListener {
         
         for (String column : columns) {
             resultsDfltTbl_.addColumn(column);
+        }
+
+        try {
+            var response = requirementsHandler.queryLeadersRequirement();
+            for (var material : response) {
+                String[] rowData = new String[] {material.getIDLider().toString(), material.getSalario().toString(), material.getCiudadResidencia()};
+                resultsDfltTbl_.addRow(rowData);
+            }
+        } catch (Exception e) {
+            System.out.println("Error handled... Message :\r\n" + e.getMessage());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error con los parametros recibidos. Por favor revise", "Consulta Lider", JOptionPane.ERROR_MESSAGE);
         }
     }
 
